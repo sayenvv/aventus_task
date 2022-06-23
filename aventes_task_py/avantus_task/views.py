@@ -6,13 +6,7 @@ from .forms import *
 def string_check(request):
     
     if(request.method=="POST"):
-        context = {
-        'str1' : '',
-        'str2' : '',
-        'str3' : '',
-        'str4' : '',
-
-    }
+        
         form = BasicForm(request.POST)
         if form.is_valid():
             master_string = form.cleaned_data['master_string']
@@ -20,14 +14,12 @@ def string_check(request):
             string2 = form.cleaned_data['string2']
             string3 = form.cleaned_data['string3']
             string4 = form.cleaned_data['string4']
-            lists = []
             master_data = [i for i in master_string]
 
             s1 = ''
             for i in string1:
                 if i in master_data:
                     s1 += i
-            print('1')
             if s1 == string1:
                 
                 context['str1'] = "{}: yes".format(string1)
@@ -43,7 +35,6 @@ def string_check(request):
             for j in string2:
                 if j in master_data:
                     s2 += j
-            print('2')
             if s2 == string2:
                 context['str2'] = "{}: yes".format(string2)
                 for j in string2:
@@ -54,11 +45,11 @@ def string_check(request):
             else:
                 context['str2'] = "{}: No".format(string2)
 
+
             s3 = ''
             for k in string3:
                 if k in master_data:
                     s3 += k
-            print('3')
             if s3 == string3:
                 context['str3'] = "{}: yes".format(string3)
                 for k in string3:
@@ -69,8 +60,8 @@ def string_check(request):
             else:
                 context['str3'] = "{}: No".format(string3)
 
+
             s4 = ''
-            print('4')
             for l in string4:
                 if l in master_data:
                     s4 += l
@@ -84,10 +75,5 @@ def string_check(request):
             else:
                 context['str4'] = "{}: No".format(string4)
 
-            print(master_data)
-            print(lists)
-
-
-        
     context['forms'] = BasicForm()
     return render(request,"index.html",context)
