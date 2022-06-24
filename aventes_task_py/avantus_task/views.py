@@ -4,7 +4,7 @@ from .forms import *
 
 # Create your views here.
 def string_check(request):
-    
+    context = {}
     if(request.method=="POST"):
         
         form = BasicForm(request.POST)
